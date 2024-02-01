@@ -1,18 +1,21 @@
+# Use the official Ruby image with the desired version
 FROM ruby:3.2.2
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
-# Install dependencies
-RUN gem install bundler
+# Copy Gemfile and Gemfile.lock to the container
 COPY Gemfile Gemfile.lock ./
+
+# Install dependencies
 RUN bundle install
 
 # Copy the application code to the container
 COPY . .
 
-# Expose port 4567
+# Expose the port the app runs on
 EXPOSE 4567
 
-# Start the Sinatra application
-CMD ["bundle", "exec", "rackup", "--host", "0.0.0.0", "-p", "4567"]
+# Command to run the application
+# CMD ["bundle", "exec", "rackup", "--host", "0.0.0.0", "-p", "4567"]
+CMD ["/bin/sh"]
