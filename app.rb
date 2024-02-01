@@ -10,8 +10,12 @@ configure do
   enable :sessions
 end
 
-# Sample route
-get '/' do
-  content_type :json
-  { message: 'Hello World!' }.to_json
+class App < Sinatra::Base
+  
+  # Sample route
+  get '/' do
+    content_type :json
+    { message: 'Hello World!' }.to_json
+  end
+
 end
