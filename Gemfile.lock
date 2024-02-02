@@ -21,6 +21,7 @@ GEM
     bigdecimal (3.1.6)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
+    dotenv (2.8.1)
     drb (2.2.0)
       ruby2_keywords
     i18n (1.14.1)
@@ -36,6 +37,9 @@ GEM
       rack (>= 3.0.0, < 4)
     rack-session (2.0.0)
       rack (>= 3.0.0)
+    rackup (2.1.0)
+      rack (>= 3)
+      webrick (~> 1.8)
     rake (13.1.0)
     ruby2_keywords (0.0.5)
     sinatra (4.0.0)
@@ -51,13 +55,16 @@ GEM
     timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    webrick (1.8.1)
 
 PLATFORMS
   arm64-darwin-21
 
 DEPENDENCIES
+  dotenv (~> 2.8, >= 2.8.1)
   pg (~> 1.5, >= 1.5.4)
   rack (~> 3.0, >= 3.0.9)
+  rackup (~> 2.1)
   rake (~> 13.1)
   sinatra (~> 4.0)
   sinatra-activerecord (~> 2.0, >= 2.0.27)
