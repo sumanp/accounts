@@ -12,13 +12,12 @@ services:
     volumes:
       - .:/accounts
     build: .
-    command: bundle exec rackup --host 0.0.0.0 -p 4567
     ports:
       - "4567:4567"
     depends_on:
       - db
     environment:
-      DATABASE_URL: "postgres://postgres:password@db:5432/"
+      DATABASE_URL: "postgres://postgres:password@db:5432/accounts_db"
     restart: on-failure
     stdin_open: true
     tty: true

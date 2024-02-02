@@ -17,5 +17,4 @@ COPY . .
 EXPOSE 4567
 
 # Command to run the application
-# CMD ["bundle", "exec", "rackup", "--host", "0.0.0.0", "-p", "4567"]
-CMD ["/bin/sh"]
+CMD ["sh", "-c", "rake db:create && rake db:migrate && rackup --host 0.0.0.0 -p 4567"]
