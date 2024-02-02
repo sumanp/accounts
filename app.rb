@@ -6,6 +6,7 @@ require 'bcrypt'
 
 require './config/db_config'
 require_relative 'models/user'
+require_relative 'mailers/confirmation_mailer'
 
 before do
   content_type :json
@@ -15,15 +16,19 @@ class App < Sinatra::Base
 
   # Registration
   post '/register' do
-    data = JSON.parse(request.body.read)
-    user = User.new(email: data['email'], password: data['password'])
+    params = JSON.parse(request.body.read)
 
-    if user.save
-      # send_confirmation_email(user.email)
-      { message: 'Registration successful. Confirmation email sent.' }.to_json
+    # Check if the email is already registered
+    if User.find_by(email: params['email'])
+      status 400
+      { message: 'Email already registered' }.to_json
     else
-      status 422
-      { error: 'Error during registration. Please try again.' }.to_json
+      User.create(email: params['email'], password: params['password'])
+
+      # Send a confirmation email
+      ConfirmationMailer.send_confirmation_email(params['email']) #TODO: move to a background job
+
+      { message: 'Registration successful. Please check your email for confirmation.' }.to_json
     end
   end
 

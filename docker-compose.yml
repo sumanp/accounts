@@ -19,6 +19,11 @@ services:
     environment:
       DATABASE_URL: "postgres://postgres:password@db:5432/accounts_production"
       APP_ENV: "production"
+      SMTP_SERVER: "smtp.gmail.com"
+      SMTP_PORT: "587"
+      SMTP_USERNAME: "your_email@gmail.com"
+      SMTP_PASSWORD: "your_password"
+      SMTP_DOMAIN: "gmail.com"
     restart: on-failure
     stdin_open: true
     tty: true
