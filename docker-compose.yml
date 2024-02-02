@@ -17,7 +17,8 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: "postgres://postgres:password@db:5432/accounts_db"
+      DATABASE_URL: "postgres://postgres:password@db:5432/accounts_production"
+      APP_ENV: "production"
     restart: on-failure
     stdin_open: true
     tty: true

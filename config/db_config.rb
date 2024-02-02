@@ -1,7 +1,7 @@
 
 configure :production do
   db = URI.parse(ENV['DATABASE_URL'])
-  set :database, {adapter: 'postgresql',  encoding: 'unicode', database: db.path[1..-1], pool: 2, username: db.user, password: db.password}
+  set :database, {adapter: 'postgresql',  encoding: 'unicode', host: db.host, database: db.path[1..-1], pool: 2, username: db.user, password: db.password}
 end
 
 configure :development do

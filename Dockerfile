@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 4567
 
 # Command to run the application
-CMD ["sh", "-c", "rake db:create && rake db:migrate && rackup --host 0.0.0.0 -p 4567"]
+CMD ["sh", "-c", "APP_ENV=production rake db:create && rake db:migrate && rackup --host 0.0.0.0 -p 4567"]
