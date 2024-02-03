@@ -4,7 +4,6 @@ require 'dotenv/load'
 require 'json'
 require 'bcrypt'
 
-require './config/db_config'
 require_relative 'models/user'
 require_relative 'mailers/auth_mailer'
 require_relative 'controllers/registration_controller'

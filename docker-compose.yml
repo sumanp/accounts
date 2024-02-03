@@ -24,6 +24,8 @@ services:
       SMTP_USERNAME: "your_email@gmail.com"
       SMTP_PASSWORD: "your_password"
       SMTP_DOMAIN: "arival.com"
+      POSTGRES_USER: postgres
+      POSTGRES_PASS: password
     restart: on-failure
     stdin_open: true
     tty: true
