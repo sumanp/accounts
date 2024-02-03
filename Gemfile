@@ -8,6 +8,7 @@ gem 'rake', '~> 13.1'
 gem 'pg', '~> 1.5', '>= 1.5.4'
 gem 'bcrypt', '~> 3.1', '>= 3.1.20'
 gem 'pony', '~> 1.13', '>= 1.13.1'
+gem 'rotp', '~> 6.3'
 
 gem 'dotenv', '~> 2.8', '>= 2.8.1', groups: [:development, :test]
 
