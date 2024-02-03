@@ -15,8 +15,10 @@ module AuthenticationHelpers
     totp.now
   end
 
-  def verify_otp(secret, otp)
+  def verify_otp?(secret, otp)
     totp = ROTP::TOTP.new(secret, issuer: "Arival Auth")
-    totp.verify(otp)
+    result = totp.verify(otp)
+    return false if result.nil?
+    true
   end
 end
