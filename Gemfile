@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby "3.2.2"
+
 gem 'sinatra', '~> 4.0'
 gem 'sinatra-activerecord', '~> 2.0', '>= 2.0.27'
 gem 'rack', '~> 3.0', '>= 3.0.9'
