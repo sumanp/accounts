@@ -4,12 +4,12 @@ require_relative '../models/user'
 require_relative '../mailers/auth_mailer'
 
 class SettingsController < Sinatra::Base
-    # Change user password
-  put 'settings/change_password/:id' do |id|
+  # Change user password
+  put '/settings/change_password/:id' do |id|
     params = JSON.parse(request.body.read)
     user = User.find_by(id: id)
 
-    if user && User.authenticate(params['current_password'])
+    if user && user.authenticate(params['current_password'])
       user.update(password: params['new_password'])
       { success: true, message: 'Password updated successfully.' }.to_json
     else
@@ -19,15 +19,15 @@ class SettingsController < Sinatra::Base
   end
 
   # Enable two-factor authentication and provide secret key (QR code)
-  put 'settings/enable_otp/:id' do |id|
+  put '/settings/enable_otp/:id' do |id|
     user = User.find_by(id: id)
 
     # Check if two-factor authentication is already enabled
-    if user.otp_enabled?
-      json success: false, message: 'Two-factor authentication is already enabled.'
+    if user.two_factor_enabled?
+      { success: false, message: 'Two-factor authentication is already enabled.' }.to_json
     else
       otp_secret = AuthenticationHelpers.generate_otp_secret
-      user.update(otp_secret: otp_secret)
+      user.update(secret_key: otp_secret, two_factor_enabled: true)
 
       # Generate QR code URI
       otp_uri = AuthenticationHelpers.generate_otp_uri(user)
@@ -39,12 +39,12 @@ class SettingsController < Sinatra::Base
   end
 
   # Disable two-factor authentication
-  put 'settings/disable_otp/:id' do |id|
+  put '/settings/disable_otp/:id' do |id|
     user = User.find_by(id: id)
 
     # Check if two-factor authentication is already disabled
-    if user.otp_enabled?
-      user.update(otp_secret: nil, otp_code: nil)
+    if user.two_factor_enabled?
+      user.update(secret_key: nil, two_factor_enabled: false)
       { success: true, message: 'Two-factor authentication disabled.' }.to_json
     else
       { success: false, message: 'Two-factor authentication is already disabled.' }.to_json

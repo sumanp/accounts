@@ -11,7 +11,7 @@ require File.expand_path('../../app.rb', __FILE__)
 
 module RSpecMixin
   include Rack::Test::Methods
-  def app() Sinatra::Application end
+  def app() App end
 end
 
 RSpec.configure do |config|
@@ -28,7 +28,6 @@ RSpec.configure do |config|
       port: 5432
     )
 
-
     ActiveRecord::Migration.suppress_messages do
       # Run migrations for the test database
       ActiveRecord::MigrationContext.new('db/migrate').migrate
@@ -40,7 +39,6 @@ RSpec.configure do |config|
   end
 
   config.before(:each, type: :feature) do
-    # For feature specs, use truncation instead of transaction
     DatabaseCleaner.strategy = :truncation
   end
 

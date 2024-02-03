@@ -6,12 +6,12 @@ module AuthenticationHelpers
   end
 
   def generate_otp_uri(user)
-    totp = ROTP::TOTP.new(user.otp_secret, issuer: 'Arival Auth')
+    totp = ROTP::TOTP.new(user.secret_key, issuer: 'Arival Auth')
     totp.provisioning_uri(user.email, issuer_name: 'Arival Auth')
   end
 
   def generate_otp_now(user)
-    totp = ROTP::TOTP.new(user.otp_secret, issuer: 'Arival Auth')
+    totp = ROTP::TOTP.new(user.secret_key, issuer: 'Arival Auth')
     totp.now
   end
 

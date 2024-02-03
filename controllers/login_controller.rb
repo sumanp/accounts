@@ -9,8 +9,8 @@ class LoginController < Sinatra::Base
     params = JSON.parse(request.body.read)
     user = User.find_by(email: params['email'])
 
-    if user && User.authenticate(params['password'])
-      if user.otp_enabled?
+    if user && user.authenticate(params['password'])
+      if user.two_factor_enabled?
         # Send one-time code to the user's email
         topt = AuthenticationHelpers.generate_otp_now(user)
         AuthMailer.send_otp_email(params['email'], topt) #TODO: move to a background job
@@ -29,7 +29,7 @@ class LoginController < Sinatra::Base
     user = User.find_by(id: id)
     params = JSON.parse(request.body.read)
 
-    if user&.otp_enabled? && AuthenticationHelpers.verify_otp?(user.otp_secret, params['otp'])
+    if user&.two_factor_enabled? && AuthenticationHelpers.verify_otp?(user.secret_key, params['otp'])
       { success: true, message: 'Two-factor authentication successful. Login complete.' }.to_json
     else
       status 401

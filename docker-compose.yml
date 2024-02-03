@@ -23,7 +23,7 @@ services:
       SMTP_PORT: "587"
       SMTP_USERNAME: "your_email@gmail.com"
       SMTP_PASSWORD: "your_password"
-      SMTP_DOMAIN: "gmail.com"
+      SMTP_DOMAIN: "arival.com"
     restart: on-failure
     stdin_open: true
     tty: true
