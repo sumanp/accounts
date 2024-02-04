@@ -3,7 +3,6 @@ ENV['APP_ENV'] = 'test'
 require 'rack/test'
 require 'rspec'
 require 'sinatra/activerecord'
-require 'rake'
 require 'database_cleaner'
 
 # Load the Sinatra application
@@ -22,9 +21,9 @@ RSpec.configure do |config|
     ActiveRecord::Base.establish_connection(
       adapter: 'postgresql',
       database: 'accounts_test',
-      username: 'postgres',
-      password: 'postgres',
-      host: 'localhost',
+      username: ENV['POSTGRES_USER'],
+      password: ENV['POSTGRES_PASS'],
+      host: ENV['POSTGRES_HOST'],
       port: 5432
     )
 
