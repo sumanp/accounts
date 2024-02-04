@@ -21,8 +21,6 @@ RSpec.describe SettingsController, type: :controller do
       expect(last_response.status).to eq(401)
       expect(JSON.parse(last_response.body)['success']).to eq(false)
       expect(JSON.parse(last_response.body)['message']).to include('Invalid current password')
-
-      # Add more expectations based on your application's response and behavior
     end
   end
 
