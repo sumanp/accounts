@@ -49,3 +49,36 @@ you have any questions or need clarification, feel free to reach out.**
 
 
 ## Usage Instruction
+**Initialise Application & Run tests:**
+
+    docker-compose up --build
+    
+This is to orchestrate web, db & test containers. The test container will run rspec.
+The endpoints are written in ruby on Sinatra framework. Rspec is used for testing.
+
+**Endpoints**
+
+    post '/register', { email: 'test@example.com', password: 'password' }.to_json, 'CONTENT_TYPE' => 'application/json'
+    post '/login', { email: 'test@example.com', password: 'password' }.to_json, 'CONTENT_TYPE' => 'application/json'
+    post "/login/verify_otp/#{user.id}", { otp: '123456' }.to_json, 'CONTENT_TYPE' => 'application/json'
+    put '/settings/enable_otp/3', {}.to_json, 'CONTENT_TYPE' => 'application/json' # user_id = 3
+    put '/settings/disable_otp/3', {}.to_json, 'CONTENT_TYPE' => 'application/json' # user_id = 3
+    put '/settings/change_password/1', { current_password: 'password', new_password: 'new_password' }.to_json, 'CONTENT_TYPE' => 'application/json'
+
+**Security**
+1. Bcrypt is used for securely hashing and storing the password in the db
+2. ROTP is used for generating time based one-time password. We are using a proven library to reduce the security risk that can possibly raise due to reinventing the wheel or writing a TOPT algorithm.
+3. Sinatra comes with built-in security features through Rack Protection. Rack Protection has been enabled to prevent common attacks.
+
+
+**Possible Improvements**
+1. Use token-based authentication (e.g., JWT) to secure API endpoints. Authenticate and authorize users before allowing access to sensitive resources. This was skipped due to time constraint.
+2. Rate limiting could be implemented to circumvent Denial-of-Service attack.
+3. Proper logging & instrumentation can be implemented for monitoring.
+4. Emails can be moved to a background job.
+5. Register endpoint can have token confirmation via email.
+6. Backup otp code can be implemented
+
+
+    
+    
