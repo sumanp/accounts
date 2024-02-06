@@ -20,10 +20,10 @@ services:
     environment:
       DATABASE_URL: "postgres://postgres:password@db:5432/accounts_production"
       APP_ENV: "production"
-      SMTP_SERVER: "smtp.gmail.com"
+      SMTP_SERVER: "smtp-relay.brevo.com"
       SMTP_PORT: "587"
-      SMTP_USERNAME: "your_email@gmail.com"
-      SMTP_PASSWORD: "your_password"
+      SMTP_USERNAME: "sumanpuri55@gmail.com"
+      SMTP_PASSWORD: "k8Lf9K0vT1VGc3UH"
       SMTP_DOMAIN: "arival.com"
       POSTGRES_USER: postgres
       POSTGRES_PASS: password
@@ -44,10 +44,10 @@ services:
       DATABASE_URL: "postgres://postgres:password@db:5432/accounts_test"
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: true
       APP_ENV: "test"
-      SMTP_SERVER: "smtp.gmail.com"
+      SMTP_SERVER: "smtp-relay.brevo.com"
       SMTP_PORT: "587"
-      SMTP_USERNAME: "your_email@gmail.com"
-      SMTP_PASSWORD: "your_password"
+      SMTP_USERNAME: "sumanpuri55@gmail.com"
+      SMTP_PASSWORD: "k8Lf9K0vT1VGc3UH"
       SMTP_DOMAIN: "arival.com"
       POSTGRES_USER: "postgres"
       POSTGRES_PASS: "password"

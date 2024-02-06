@@ -17,6 +17,7 @@ class AuthMailer
 
   def self.send_email(email, subject, body)
     Pony.mail({
+      from: 'noreply@arival.com',
       to: email,
       subject: subject,
       body: body,

@@ -15,9 +15,9 @@ class LoginController < Sinatra::Base
         topt = AuthenticationHelpers.generate_otp_now(user)
         AuthMailer.send_otp_email(params['email'], topt) #TODO: move to a background job
 
-        { success: true, message: 'Two-factor authentication code sent. Provide the code to complete login.' }.to_json
+        { success: true, user_id: user.id, message: 'Two-factor authentication code sent. Provide the code to complete login.' }.to_json
       else
-        { success: true, message: 'Login successful.' }.to_json
+        { success: true, user_id: user.id, message: 'Login successful.' }.to_json
       end
     else
       status 401

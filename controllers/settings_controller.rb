@@ -1,7 +1,9 @@
 require 'sinatra/base'
 require 'json'
 require_relative '../models/user'
-require_relative '../mailers/auth_mailer'
+require_relative '../helpers/authentication_helpers'
+
+helpers AuthenticationHelpers
 
 class SettingsController < Sinatra::Base
   # Change user password
@@ -28,6 +30,7 @@ class SettingsController < Sinatra::Base
     else
       otp_secret = AuthenticationHelpers.generate_otp_secret
       user.update(secret_key: otp_secret, two_factor_enabled: true)
+      puts user.errors.full_messages
 
       # Generate QR code URI
       otp_uri = AuthenticationHelpers.generate_otp_uri(user)
