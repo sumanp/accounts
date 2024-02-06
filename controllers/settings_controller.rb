@@ -16,7 +16,7 @@ class SettingsController < Sinatra::Base
       { success: true, message: 'Password updated successfully.' }.to_json
     else
       status 401
-      { success: false, message: 'Invalid current password.' }.to_json
+      { success: false, message: 'Invalid current password or user_id.' }.to_json
     end
   end
 

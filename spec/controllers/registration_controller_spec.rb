@@ -21,7 +21,7 @@ RSpec.describe RegistrationController, type: :controller do
     it 'handles registration failure' do
       allow(User).to receive(:valid?).and_return(false)
 
-      post '/register', { email: 'test@example.com', password: 'pass' }.to_json, 'CONTENT_TYPE' => 'application/json'
+      post '/register', { email: 'test@example.com' }.to_json, 'CONTENT_TYPE' => 'application/json'
 
       expect(last_response.status).to eq(400)
       expect(last_response.body).to include('Validation failed')
