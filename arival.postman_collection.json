@@ -1,0 +1,219 @@
+{
+	"info": {
+		"_postman_id": "aa2c64dd-c28f-4412-a900-2e332a133d2b",
+		"name": "arival",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2763510"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"arivaltest@gmail.com\", \"password\": \"apple123\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4567/login",
+					"host": [
+						"localhost"
+					],
+					"port": "4567",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"arivaltest@gmail.com\", \"password\": \"apple123\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4567/register",
+					"host": [
+						"localhost"
+					],
+					"port": "4567",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify_otp",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"otp\": \"1234\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4567/login/verify_otp/4",
+					"host": [
+						"localhost"
+					],
+					"port": "4567",
+					"path": [
+						"login",
+						"verify_otp",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "enable_otp",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4567/settings/enable_otp/2",
+					"host": [
+						"localhost"
+					],
+					"port": "4567",
+					"path": [
+						"settings",
+						"enable_otp",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "disable_otp",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4567/settings/disable_otp/2",
+					"host": [
+						"localhost"
+					],
+					"port": "4567",
+					"path": [
+						"settings",
+						"disable_otp",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "password_change",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"current_password\": \"password\", \"new_password\": \"new_password\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4567/settings/change_password/2",
+					"host": [
+						"localhost"
+					],
+					"port": "4567",
+					"path": [
+						"settings",
+						"change_password",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
