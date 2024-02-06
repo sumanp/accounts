@@ -10,11 +10,7 @@
 
 `docker-compose up --build`
 
-This is to orchestrate web, db & test containers. The test container will run rspec.
-
-The endpoints are written in ruby on Sinatra framework. Rspec is used for testing.
-
-  
+This is to orchestrate web, db & test containers. The test container will run rspec.The endpoints are written in ruby on Sinatra framework. Rspec is used for testing.
 
 *Note: Ideally the SMTP credentials should not be hard-coded on the docker-compose file. This is done in this case to make it easier for the reviewer to test emails. The credentials are temporary.*
 
@@ -22,16 +18,13 @@ The endpoints are written in ruby on Sinatra framework. Rspec is used for testin
 
 **Endpoints**
 
-
 Additionally, postman collection `arival.postman_collection.json` has been added for the reviewer's convenience when testing API endpoints.
 
-  
 
 Please test API endpoints in this sequence:
 
 1. Register (check email for confirmation)
 `post '/register', { email: 'test@example.com', password: 'password' }.to_json, 'CONTENT_TYPE' => 'application/json'`
-
     
 2. Login
 `post '/login', { email: 'test@example.com', password: 'password' }.to_json, 'CONTENT_TYPE' => 'application/json'`
