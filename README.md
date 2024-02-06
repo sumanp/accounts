@@ -56,6 +56,8 @@ you have any questions or need clarification, feel free to reach out.**
 This is to orchestrate web, db & test containers. The test container will run rspec.
 The endpoints are written in ruby on Sinatra framework. Rspec is used for testing.
 
+Note: Ideally the smtp credentails should not be hard-coded on the docker-compose file. This is done in this case to make it easier for the reviewer to test emails. The credentails are temporary.
+
 **Endpoints**
 
     post '/register', { email: 'test@example.com', password: 'password' }.to_json, 'CONTENT_TYPE' => 'application/json'
