@@ -8,6 +8,11 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c pg_isready -d postgres://postgres:password@db:5432/accounts_production"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
   web:
     volumes:
       - .:/accounts
@@ -16,7 +21,8 @@ services:
     ports:
       - "4567:4567"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       DATABASE_URL: "postgres://postgres:password@db:5432/accounts_production"
       APP_ENV: "production"
@@ -39,7 +45,8 @@ services:
     ports:
       - "4568:4567"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       DATABASE_URL: "postgres://postgres:password@db:5432/accounts_test"
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: true
