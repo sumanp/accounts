@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     healthcheck:
-      test: ["CMD-SHELL", "sh -c pg_isready -d postgres://postgres:password@db:5432/accounts_production"]
+      test: ["CMD-SHELL", "sh -c PGPASSWORD=password pg_isready -U postgres -h db accounts_production"]
       interval: 10s
       timeout: 3s
       retries: 3
