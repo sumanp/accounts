@@ -71,6 +71,7 @@ Note: Ideally the smtp credentails should not be hard-coded on the docker-compos
 1. Bcrypt is used for securely hashing and storing the password in the db
 2. ROTP is used for generating time based one-time password. We are using a proven library to reduce the security risk that can possibly raise due to reinventing the wheel or writing a TOPT algorithm.
 3. Sinatra comes with built-in security features through Rack Protection. Rack Protection has been enabled to prevent common attacks.
+4. ActiveRecord's has_secure_password is used to securely hash and store the password in the db. This is due to time constraint and avoid security flaws.
 
 
 **Possible Improvements**
