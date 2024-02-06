@@ -10,7 +10,7 @@ class LoginController < Sinatra::Base
     user = User.find_by(email: params['email'])
 
     if user && user.authenticate(params['password'])
-      if user.two_factor_enabled?
+      if user.two_factor_enabled
         # Send one-time code to the user's email
         topt = AuthenticationHelpers.generate_otp_now(user)
         AuthMailer.send_otp_email(params['email'], topt) #TODO: move to a background job

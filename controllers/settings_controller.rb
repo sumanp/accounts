@@ -25,7 +25,7 @@ class SettingsController < Sinatra::Base
     user = User.find_by(id: id)
 
     # Check if two-factor authentication is already enabled
-    if user.two_factor_enabled?
+    if user.two_factor_enabled
       { success: false, message: 'Two-factor authentication is already enabled.' }.to_json
     else
       otp_secret = AuthenticationHelpers.generate_otp_secret
@@ -46,7 +46,7 @@ class SettingsController < Sinatra::Base
     user = User.find_by(id: id)
 
     # Check if two-factor authentication is already disabled
-    if user.two_factor_enabled?
+    if user.two_factor_enabled
       user.update(secret_key: nil, two_factor_enabled: false)
       { success: true, message: 'Two-factor authentication disabled.' }.to_json
     else
