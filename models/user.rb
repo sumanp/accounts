@@ -1,5 +1,4 @@
 require 'bcrypt'
-require_relative '../helpers/authentication_helpers'
 
 class User < ActiveRecord::Base
   has_secure_password
