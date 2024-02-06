@@ -9,7 +9,7 @@ class AuthMailer
 
   def self.send_otp_email(email, topt)
     subject = 'Two-Factor Authentication Code'
-    body = "Your one-time code is: #{totp}"
+    body = "Your one-time code is: #{topt}"
     send_email(email, subject, body)
   end
 
