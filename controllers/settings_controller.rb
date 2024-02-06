@@ -25,19 +25,23 @@ class SettingsController < Sinatra::Base
     user = User.find_by(id: id)
 
     # Check if two-factor authentication is already enabled
-    if user.two_factor_enabled
-      { success: false, message: 'Two-factor authentication is already enabled.' }.to_json
+    if user.present?
+      if user.two_factor_enabled
+        { success: false, message: 'Two-factor authentication is already enabled.' }.to_json
+      else
+        otp_secret = AuthenticationHelpers.generate_otp_secret
+        user.update(secret_key: otp_secret, two_factor_enabled: true)
+
+        # Generate QR code URI
+        otp_uri = AuthenticationHelpers.generate_otp_uri(user)
+
+        # Return the secret key and QR code URI to the user
+        { success: true, message: 'Two-factor authentication enabled.',
+          otp_secret: otp_secret, otp_uri: otp_uri }.to_json
+      end
     else
-      otp_secret = AuthenticationHelpers.generate_otp_secret
-      user.update(secret_key: otp_secret, two_factor_enabled: true)
-      puts user.errors.full_messages
-
-      # Generate QR code URI
-      otp_uri = AuthenticationHelpers.generate_otp_uri(user)
-
-      # Return the secret key and QR code URI to the user
-      { success: true, message: 'Two-factor authentication enabled.',
-        otp_secret: otp_secret, otp_uri: otp_uri }.to_json
+      status 404
+      { success: false, message: 'User not found.' }.to_json
     end
   end
 
@@ -46,11 +50,16 @@ class SettingsController < Sinatra::Base
     user = User.find_by(id: id)
 
     # Check if two-factor authentication is already disabled
-    if user.two_factor_enabled
-      user.update(secret_key: nil, two_factor_enabled: false)
-      { success: true, message: 'Two-factor authentication disabled.' }.to_json
+    if user.present?
+      if user.two_factor_enabled
+        user.update(secret_key: nil, two_factor_enabled: false)
+        { success: true, message: 'Two-factor authentication disabled.' }.to_json
+      else
+        { success: false, message: 'Two-factor authentication is already disabled.' }.to_json
+      end
     else
-      { success: false, message: 'Two-factor authentication is already disabled.' }.to_json
+      status 404
+      { success: false, message: 'User not found.' }.to_json
     end
   end
 end
