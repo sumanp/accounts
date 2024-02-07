@@ -29,7 +29,7 @@ class LoginController < Sinatra::Base
     user = User.find_by(id: id)
     params = JSON.parse(request.body.read)
 
-    if user&.two_factor_enabled? && AuthenticationHelpers.verify_otp?(user.secret_key, params['otp'])
+    if user&.two_factor_enabled? && user.verify_otp?(params['otp'])
       { success: true, message: 'Two-factor authentication successful. Login complete.' }.to_json
     else
       status 401
