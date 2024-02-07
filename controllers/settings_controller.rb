@@ -1,9 +1,6 @@
 require 'sinatra/base'
 require 'json'
 require_relative '../models/user'
-require_relative '../helpers/authentication_helpers'
-
-helpers AuthenticationHelpers
 
 class SettingsController < Sinatra::Base
   # Change user password
