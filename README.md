@@ -14,7 +14,7 @@ This is to orchestrate web, db & test containers. The test container will run rs
 
 *Note: Ideally the SMTP credentials should not be hard-coded on the docker-compose file. This is done in this case to make it easier for the reviewer to test emails. The credentials are temporary.*
 
-  
+*Caution: Possible bug in postman, when testing the `verify_otp` endpoint, enter the OTP and hit save before sending the request. Sometimes old otp gets sent instead of a new one.
 
 **Endpoints**
 
